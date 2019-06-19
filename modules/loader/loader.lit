@@ -97,3 +97,16 @@ And lastly the checksum:
 --- Checksum
 CHECKSUM equ -(MAGIC + FLAGS)
 ---
+
+Now that we defined the constants for the Multiboot header, we can declare the
+header itself. Note that this header must be aligned at a 32-bit boundary and in
+its own section so that the header can be forced to be within the first 8 KiB of
+the Loader.
+
+--- Multiboot header declaration
+section .multiboot
+align 4
+	dd MAGIC
+	dd FLAGS
+	dd CHECKSUM
+---
