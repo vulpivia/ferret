@@ -23,7 +23,7 @@
 }
 
 html {
-	font-family: "Open Sans";
+	font-family: "Open Sans", sans-serif;
 	font-size: 17px;
 }
 
@@ -59,7 +59,7 @@ h4 {
 
 code,
 .codeblock_name {
-	font-family: "Share Tech Mono";
+	font-family: "Share Tech Mono", monospace;
 }
 
 blockquote {
@@ -71,5 +71,5 @@ blockquote {
 
 pre.prettyprint {
 	font-size: 16px;
-	font-family: "Share Tech Mono";
+	font-family: "Share Tech Mono", monospace;
 }
