@@ -1,0 +1,19 @@
+{
+	"editor.detectIndentation": false,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"editor.insertSpaces": false,
+	"editor.minimap.maxColumn": 80,
+	"editor.rulers": [
+		80
+	],
+	"editor.tabSize": 4,
+	"editor.wordWrap": "off",
+	"files.autoGuessEncoding": false,
+	"files.encoding": "utf8",
+	"files.eol": "\n",
+	"files.insertFinalNewline": true,
+	"json.format.enable": true,
+	"markdown.preview.breaks": false
+}
