@@ -33,5 +33,6 @@
 	"prettier.tabWidth": 4,
 	"prettier.trailingComma": "none",
 	"prettier.tslintIntegration": false,
-	"prettier.useTabs": true
+	"prettier.useTabs": true,
+	"stylelint.enable": true
 }
