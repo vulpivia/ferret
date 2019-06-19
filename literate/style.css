@@ -57,7 +57,8 @@ h4 {
 	font-size: 1.2rem;
 }
 
-code {
+code,
+.codeblock_name {
 	font-family: "Share Tech Mono";
 }
 
@@ -66,4 +67,9 @@ blockquote {
 	color: #495057;
 	border-left: 4px solid #5c7cfa;
 	padding: 0 12px;
+}
+
+pre.prettyprint {
+	font-size: 16px;
+	font-family: "Share Tech Mono";
 }
