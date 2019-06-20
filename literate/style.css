@@ -3,9 +3,11 @@
 	font-style: normal;
 	font-weight: normal;
 	font-display: swap;
-	src: url(https://fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0b.woff2)
+	src:
+		url(https://fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0b.woff2)
 		format("woff2");
-	unicode-range: u+0000-00ff,
+	unicode-range:
+		u+0000-00ff,
 		u+0131,
 		u+0152-0153,
 		u+02bb-02bc,
@@ -29,9 +31,11 @@
 	font-style: normal;
 	font-weight: normal;
 	font-display: swap;
-	src: url(https://fonts.gstatic.com/s/sharetechmono/v8/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2)
+	src:
+		url(https://fonts.gstatic.com/s/sharetechmono/v8/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2)
 		format("woff2");
-	unicode-range: u+0000-00ff,
+	unicode-range:
+		u+0000-00ff,
 		u+0131,
 		u+0152-0153,
 		u+02bb-02bc,
