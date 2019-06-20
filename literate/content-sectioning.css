@@ -1,0 +1,24 @@
+/*
+	Content Sectioning
+
+	Content sectioning elements allow you to organize the document content into
+	logical pieces. Use the sectioning elements to create a broad outline for
+	your page content, including header and footer navigation, and heading
+	elements to identify sections of content.
+*/
+
+h1 {
+	/* Fonts */
+	font-size: 2rem;
+}
+
+h4 {
+	/* Fonts */
+	font-size: 1.2rem;
+}
+
+section {
+	/* Box Model */
+	margin: 0 auto;
+	max-width: 800px;
+}

@@ -2,7 +2,11 @@
 @comment_type ; %s
 @title Loader
 
-@overwrite_css ../../literate/style.css
+@overwrite_css ../../literate/root.css
+@add_css ../../literate/fonts.css
+@add_css ../../literate/content-sectioning.css
+@add_css ../../literate/text-content.css
+@add_css ../../literate/inline-text-semantics.css
 
 @s Introduction
 
