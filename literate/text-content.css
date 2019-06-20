@@ -18,9 +18,3 @@ blockquote {
 	/* Color */
 	color: #495057;
 }
-
-pre.prettyprint {
-	/* Fonts */
-	font-family: "Share Tech Mono", monospace;
-	font-size: 16px;
-}
