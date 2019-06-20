@@ -7,6 +7,7 @@
 @add_css ../../literate/content-sectioning.css
 @add_css ../../literate/text-content.css
 @add_css ../../literate/inline-text-semantics.css
+@colorscheme ../../literate/code.css
 
 @s Introduction
 
