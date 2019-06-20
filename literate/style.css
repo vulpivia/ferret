@@ -1,7 +1,7 @@
 @font-face {
 	font-family: "Open Sans";
 	font-style: normal;
-	font-weight: 400;
+	font-weight: normal;
 	font-display: swap;
 	src: url(https://fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0b.woff2)
 		format("woff2");
@@ -13,7 +13,7 @@
 @font-face {
 	font-family: "Share Tech Mono";
 	font-style: normal;
-	font-weight: 400;
+	font-weight: normal;
 	font-display: swap;
 	src: url(https://fonts.gstatic.com/s/sharetechmono/v8/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2)
 		format("woff2");
@@ -28,7 +28,7 @@ html {
 }
 
 body {
-	color: #343a40;
+	color: #343A40;
 }
 
 section {
@@ -37,7 +37,7 @@ section {
 }
 
 a {
-	color: #364fc7;
+	color: #364FC7;
 	text-decoration: none;
 }
 
@@ -63,9 +63,9 @@ code,
 }
 
 blockquote {
-	background-color: #dee2e6;
+	background-color: #DEE2E6;
 	color: #495057;
-	border-left: 4px solid #5c7cfa;
+	border-left: 4px solid #5C7CFA;
 	padding: 0 12px;
 }
 
