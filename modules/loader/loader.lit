@@ -2,12 +2,12 @@
 @comment_type ; %s
 @title Loader
 
-@overwrite_css ../../literate/root.css
-@add_css ../../literate/fonts.css
-@add_css ../../literate/content-sectioning.css
-@add_css ../../literate/text-content.css
-@add_css ../../literate/inline-text-semantics.css
-@colorscheme ../../literate/code.css
+@overwrite_css literate/root.css
+@add_css literate/fonts.css
+@add_css literate/content-sectioning.css
+@add_css literate/text-content.css
+@add_css literate/inline-text-semantics.css
+@colorscheme literate/code.css
 
 @s Introduction
 
@@ -114,4 +114,13 @@ align 4
 	dd MAGIC
 	dd FLAGS
 	dd CHECKSUM
+---
+
+Finally, put the pieces together:
+
+--- loader.asm
+@{Magic}
+@{Flags}
+@{Checksum}
+@{Multiboot header declaration}
 ---
