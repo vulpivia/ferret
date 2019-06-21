@@ -116,6 +116,57 @@ align 4
 	dd CHECKSUM
 ---
 
+@s Entry Point
+
+For now, we'll use a simple entry point that does nothing, just to test if GRUB
+recognizes our Multiboot header.
+
+--- Start
+section .text
+global start:function (start.end - start)
+start:
+	cli
+	hlt
+	jmp start
+.end:
+---
+
+@s Linking the Loader
+
+When assembling our code, we get an object file which doesn't contain any
+information on where parts of our code end up in the executable. This is where
+our linker script comes in. We use the linker script to define the entry point
+(`start`) and the sections needed for an ELF binary file, which are:
+
+- `.text` for code,
+- `.data` for initialized data,
+- `.rodata` for initialized read-only data,
+- and `.bss` for uninitialized data.
+
+Let's start with the entry point:
+
+@comment_type /* %s */
+
+--- Entry point
+ENTRY(start)
+---
+
+Next, our sections (aligned on 4 KiB blocks). Note that we begin putting our
+sections at 1 MiB, who knows why...
+
+--- Sections
+SECTIONS {
+	. = 1M
+
+	.text : ALIGN(4K) {
+		*(.multiboot)
+		*(.text)
+	}
+}
+---
+
+@comment_type ; %s
+
 Finally, put the pieces together:
 
 --- loader.asm
@@ -123,4 +174,12 @@ Finally, put the pieces together:
 @{Flags}
 @{Checksum}
 @{Multiboot header declaration}
+@{Start}
+---
+
+@comment_type /* %s */
+
+--- loader.ld
+@{Entry point}
+@{Sections}
 ---
