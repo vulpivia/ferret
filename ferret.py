@@ -50,12 +50,12 @@ The available commands are:
 		# Assemble source code
 		os.system("nasm -felf32 " + loader_file_loader_asm + " -o " + loader_file_loader_o)
 		# Link to binary
-		os.system("ld " + loader_file_loader_ld + " -o " + loader_dir_bin + "loader " + loader_file_loader_asm)
+		os.system("ld -m elf_i386 --script=" + loader_file_loader_ld + " -o " + loader_dir_bin + "loader " + loader_file_loader_o)
 		exit(0)
 
 	def run(self):
 		# TODO: loader.o is object file, needs ld
-		os.system("qemu-system-i386 -kernel modules/loader/bin/loader.o")
+		os.system("qemu-system-i386 -kernel modules/loader/bin/loader")
 		exit(0)
 
 if __name__ == "__main__":

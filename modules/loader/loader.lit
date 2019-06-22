@@ -156,7 +156,7 @@ sections at 1 MiB, who knows why...
 
 --- Sections
 SECTIONS {
-	. = 1M
+	. = 1M;
 
 	.text : ALIGN(4K) {
 		*(.multiboot)
