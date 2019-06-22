@@ -1,0 +1,105 @@
+@font-face {
+	/*
+		Determines how a font face is displayed on whether and when it is
+		downloaded and ready to use.
+	*/
+	font-display: swap;
+	/*
+		Specifies a name that will be used as the font face value for font
+		properties.
+	*/
+	font-family: "Open Sans";
+	/*
+		A font-style value. Since Firefox 61 (and in other modern browsers) this
+		also accepts two values to specify a range that is supported by a
+		font-face, for example font-style: oblique 20deg 50deg;
+	*/
+	font-style: normal;
+	/*
+		A font-weight value. Since Firefox 61 (and in other modern browsers)
+		this also accepts two values to specify a range that is supported by a
+		font-face, for example font-weight: 100 400;
+	*/
+	font-weight: normal;
+	/*
+		Specifies the resource containing the font data. This can be a URL to a
+		remote fontfile location or the name of a font on the user's computer.
+	*/
+	src:
+		url(https://fonts.gstatic.com/s/opensans/v16/mem8YaGs126MiZpBA-UFVZ0b.woff2)
+		format("woff2");
+	/*
+		The range of Unicode code points to be used from the font.
+	*/
+	unicode-range:
+		u+0000-00ff,
+		u+0131,
+		u+0152-0153,
+		u+02bb-02bc,
+		u+02c6,
+		u+02da,
+		u+02dc,
+		u+2000-206f,
+		u+2074,
+		u+20ac,
+		u+2122,
+		u+2191,
+		u+2193,
+		u+2212,
+		u+2215,
+		u+feff,
+		u+fffd;
+}
+
+@font-face {
+	/*
+		Determines how a font face is displayed on whether and when it is
+		downloaded and ready to use.
+	*/
+	font-display: swap;
+	/*
+		Specifies a name that will be used as the font face value for font
+		properties.
+	*/
+	font-family: "Share Tech Mono";
+	/*
+		A font-style value. Since Firefox 61 (and in other modern browsers) this
+		also accepts two values to specify a range that is supported by a
+		font-face, for example font-style: oblique 20deg 50deg;
+	*/
+	font-style: normal;
+	/*
+		A font-weight value. Since Firefox 61 (and in other modern browsers)
+		this also accepts two values to specify a range that is supported by a
+		font-face, for example font-weight: 100 400;
+	*/
+	font-weight: normal;
+	/*
+		Specifies the resource containing the font data. This can be a URL to a
+		remote fontfile location or the name of a font on the user's computer.
+	*/
+	src:
+		url(https://fonts.gstatic.com/s/sharetechmono/v8/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2)
+		format("woff2");
+	/*
+		The range of Unicode code points to be used from the font.
+	*/
+	unicode-range:
+		u+0000-00ff,
+		u+0131,
+		u+0152-0153,
+		u+02bb-02bc,
+		u+02c6,
+		u+02da,
+		u+02dc,
+		u+2000-206f,
+		u+2074,
+		u+20ac,
+		u+2122,
+		u+2191,
+		u+2193,
+		u+2212,
+		u+2215,
+		u+feff,
+		u+fffd;
+}

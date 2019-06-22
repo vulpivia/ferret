@@ -1,0 +1,66 @@
+.pln {
+	/* Color */
+	color: #212529;
+}
+
+.str {
+}
+
+.kwd {
+}
+
+.com {
+}
+
+.typ {
+}
+
+.lit {
+	/* Color */
+	color: #1864AB;
+}
+
+.clo,
+.opn,
+.pun {
+	/* Color */
+	color: #A61E4D;
+}
+
+.tag {
+}
+
+.atn {
+}
+
+.atv {
+}
+
+.dec {
+}
+
+.var {
+}
+
+.fun {
+}
+
+pre {
+	/* Backgrounds and Borders */
+	background-color: #DEE2E6;
+	border: 1px solid #ADB5BD;
+
+	/* Box Model */
+	padding: 10px;
+
+	/* Fonts */
+	font-family: "Share Tech Mono", monospace;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+.linenums {
+	/* Box Model */
+	margin-bottom: 0;
+	margin-top: 0;
+}

@@ -1,0 +1,30 @@
+/*
+	Inline Text Semantics
+
+	Use the HTML inline text semantic to define the meaning, structure, or style
+	of a word, line, or any arbitrary piece of text.
+*/
+
+a {
+	/* Color */
+	color: #364FC7;
+
+	/* Text Decoration */
+	text-decoration: none;
+}
+
+a:hover {
+	/* Text Decoration */
+	text-decoration: underline;
+}
+
+a[name] {
+	/* Text Decoration */
+	text-decoration: none;
+}
+
+code,
+.codeblock_name {
+	/* Fonts */
+	font-family: "Share Tech Mono", monospace;
+}

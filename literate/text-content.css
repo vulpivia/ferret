@@ -1,0 +1,20 @@
+/*
+	Text Content
+
+	Use HTML text content elements to organize blocks or sections of content
+	placed between the opening <body> and closing </body> tags. Important for
+	accessibility and SEO, these elements identify the purpose or structure of
+	that content.
+*/
+
+blockquote {
+	/* Backgrounds and Borders */
+	background-color: #DEE2E6;
+	border-left: 4px solid #5C7CFA;
+
+	/* Box Model */
+	padding: 0 12px;
+
+	/* Color */
+	color: #495057;
+}

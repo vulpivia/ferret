@@ -1,4 +1,7 @@
 {
+	"MD013": {
+		"tables": false
+	},
 	"MD030": {
 		"ul_multi": 3,
 		"ul_single": 3

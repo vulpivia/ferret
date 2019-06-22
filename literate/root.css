@@ -1,0 +1,18 @@
+/*
+	Main Root
+*/
+
+html {
+	/* Fonts */
+	font-family: "Open Sans", sans-serif;
+	font-size: 17px;
+}
+
+/*
+	Sectioning Root
+*/
+
+body {
+	/* Color */
+	color: #343A40;
+}

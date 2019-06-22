@@ -1,0 +1,185 @@
+@code_type Assembly .asm
+@comment_type ; %s
+@title Loader
+
+@overwrite_css literate/root.css
+@add_css literate/fonts.css
+@add_css literate/content-sectioning.css
+@add_css literate/text-content.css
+@add_css literate/inline-text-semantics.css
+@colorscheme literate/code.css
+
+@s Introduction
+
+To start an operating system, in our case *Ferret*, an existing piece of
+software, called the bootloader, is needed. The bootloader used by Ferret is
+[GRUB](https://www.gnu.org/software/grub/), which follows the [Multiboot
+specification](https://www.gnu.org/software/grub/manual/multiboot/multiboot.html).
+Ferret's kernel is not compatible with the Multiboot specification, since that
+specification loads an x86 (32-bit) operating system and Ferret is a x86-64
+(64-bit) operating system.
+
+This is the reason this *Loader* is required. It sets up a basic environment
+that enables us to switch into [long
+mode](https://en.wikipedia.org/wiki/Long_mode) and start our 64-bit kernel from
+there.
+
+@s Multiboot Header
+
+A Multiboot-compatible bootloader identifies available operating systems by
+their provided Multiboot header. This header must contain the following fields
+(descriptions quoted from the Multiboot specification):
+
+`magic`
+
+> The field `magic` is the magic number identifying the header, which must be
+> the hexadecimal value `0x1BADB002`.
+
+`flags`
+
+> The field `flags` specifies features that the OS image requests or requires of
+> an boot loader. Bits 0-15 indicate requirements; if the boot loader sees any
+> of these bits set but doesn't understand the flag or can't fulfill the
+> requirements it indicates for some reason, it must notify the user and fail to
+> load the OS image. Bits 16-31 indicate optional features; if any bits in this
+> range are set but the boot loader doesn't understand them, it may simply
+> ignore them and proceed as usual. Naturally, all as-yet-undefined bits in the
+> `flags` word must be set to zero in OS images. This way, the `flags` fields
+> serves for version control as well as simple feature selection.
+>
+> If bit 0 in the `flags` word is set, then all boot modules loaded along with
+> the operating system must be aligned on page (4KB) boundaries. Some operating
+> systems expect to be able to map the pages containing boot modules directly
+> into a paged address space during startup, and thus need the boot modules to
+> be page-aligned.
+>
+> If bit 1 in the `flags` word is set, then information on available memory via
+> at least the `mem_*` fields of the Multiboot information structure (see [Boot
+> information
+> format](https://www.gnu.org/software/grub/manual/multiboot/multiboot.html#Boot-information-format))
+> must be included. If the boot loader is capable of passing a memory map (the
+> `mmap_*` fields) and one exists, then it may be included as well.
+>
+> If bit 2 in the `flags` word is set, information about the video mode table
+> (see [Boot information
+> format](https://www.gnu.org/software/grub/manual/multiboot/multiboot.html#Boot-information-format))
+> must be available to the kernel.
+>
+> If bit 16 in the `flags` word is set, then the fields at offsets 12-28 in the
+> Multiboot header are valid, and the boot loader should use them instead of the
+> fields in the actual executable header to calculate where to load the OS
+> image. This information does not need to be provided if the kernel image is in
+> `ELF` format, but it *must* be provided if the images is in a.out format or in
+> some other format. Compliant boot loaders must be able to load images that
+> either are in `ELF` format or contain the load address information embedded in
+> the Multiboot header; they may also directly support other executable formats,
+> such as particular a.out variants, but are not required to.
+
+`checksum`
+
+> The field `checksum` is a 32-bit unsigned value which, when added to the other
+> magic fields (i.e. `magic` and `flags`), must have a 32-bit unsigned sum of
+> zero.
+
+Starting with the `magic` field, we can define it as follows:
+
+--- Magic
+MAGIC equ 0x1BADB002
+---
+
+For the flags, we just need page boundary alignment (bit 0) and a memory map
+(bit 1):
+
+--- Flags
+PAGE_ALIGN equ 1 << 0
+MEMORY_MAP equ 1 << 1
+
+FLAGS equ PAGE_ALIGN | MEMORY_MAP
+---
+
+And lastly the checksum:
+
+--- Checksum
+CHECKSUM equ -(MAGIC + FLAGS)
+---
+
+Now that we defined the constants for the Multiboot header, we can declare the
+header itself. Note that this header must be aligned at a 32-bit boundary and in
+its own section so that the header can be forced to be within the first 8 KiB of
+the Loader.
+
+--- Multiboot header declaration
+section .multiboot
+align 4
+	dd MAGIC
+	dd FLAGS
+	dd CHECKSUM
+---
+
+@s Entry Point
+
+For now, we'll use a simple entry point that does nothing, just to test if GRUB
+recognizes our Multiboot header.
+
+--- Start
+section .text
+global start:function (start.end - start)
+start:
+	cli
+	hlt
+	jmp start
+.end:
+---
+
+@s Linking the Loader
+
+When assembling our code, we get an object file which doesn't contain any
+information on where parts of our code end up in the executable. This is where
+our linker script comes in. We use the linker script to define the entry point
+(`start`) and the sections needed for an ELF binary file, which are:
+
+- `.text` for code,
+- `.data` for initialized data,
+- `.rodata` for initialized read-only data,
+- and `.bss` for uninitialized data.
+
+Let's start with the entry point:
+
+@comment_type /* %s */
+
+--- Entry point
+ENTRY(start)
+---
+
+Next, our sections (aligned on 4 KiB blocks). Note that we begin putting our
+sections at 1 MiB, who knows why...
+
+--- Sections
+SECTIONS {
+	. = 1M;
+
+	.text : ALIGN(4K) {
+		*(.multiboot)
+		*(.text)
+	}
+}
+---
+
+@comment_type ; %s
+
+Finally, put the pieces together:
+
+--- loader.asm
+@{Magic}
+@{Flags}
+@{Checksum}
+@{Multiboot header declaration}
+@{Start}
+---
+
+@comment_type /* %s */
+
+--- loader.ld
+@{Entry point}
+@{Sections}
+---
