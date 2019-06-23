@@ -131,6 +131,39 @@ start:
 .end:
 ---
 
+@s Stack Pointer
+
+The first thing that we need to do is to set up a stack pointer, so that we can
+use the stack in the code that follows after. Since we don't know yet how much
+memory is available, it is best to reserve a piece of uninitialized memory in
+the `bss` section.
+
+**Note**: Alignment on 4 bytes is recommended from a performance perspective.
+
+--- Stack setup
+STACK_SIZE equ 4096
+
+section .bss
+align 4
+stack:
+	resb STACK_SIZE
+---
+
+We change our `start` function to the following:
+
+--- Start :=
+section .text
+global start:function (start.end - start)
+start:
+	cli
+
+	mov esp, stack + STACK_SIZE
+
+	hlt
+	jmp start
+.end:
+---
+
 @s Linking the Loader
 
 When assembling our code, we get an object file which doesn't contain any
@@ -175,6 +208,7 @@ Finally, put the pieces together:
 @{Checksum}
 @{Multiboot header declaration}
 @{Start}
+@{Stack setup}
 ---
 
 @comment_type /* %s */
