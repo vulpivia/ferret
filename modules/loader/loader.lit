@@ -131,6 +131,7 @@ start:
 .end:
 ---
 
+<<<<<<< HEAD
 @s Stack Pointer
 
 The first thing that we need to do is to set up a stack pointer, so that we can
@@ -164,6 +165,8 @@ start:
 .end:
 ---
 
+=======
+>>>>>>> 9e18375d135fabf17ca2905a23ee0fc43a9cae97
 @s Linking the Loader
 
 When assembling our code, we get an object file which doesn't contain any
@@ -208,7 +211,10 @@ Finally, put the pieces together:
 @{Checksum}
 @{Multiboot header declaration}
 @{Start}
+<<<<<<< HEAD
 @{Stack setup}
+=======
+>>>>>>> 9e18375d135fabf17ca2905a23ee0fc43a9cae97
 ---
 
 @comment_type /* %s */
