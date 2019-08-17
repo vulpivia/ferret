@@ -158,11 +158,16 @@ start:
 	cli
 
 	mov esp, stack + STACK_SIZE
+	mov ebp, stack + STACK_SIZE
 
 	hlt
 	jmp start
 .end:
 ---
+
+Note that we set both `esp` and `ebp` to the top of our stack. `esp` represents
+the stack pointer (current position) while `ebp` represents the base pointer
+(start of the stack).
 
 @s Linking the Loader
 
