@@ -169,6 +169,63 @@ Note that we set both `esp` and `ebp` to the top of our stack. `esp` represents
 the stack pointer (current position) while `ebp` represents the base pointer
 (start of the stack).
 
+@s GDT Setup
+
+The next step is for our Loader to setup a 32-bit Global Descriptor Table. This
+step can be broken up into two smaller steps: the table declaration and the
+loading of the new GDT. Let's start with the declaration of the table entries.
+
+Each entry in the GDT is 8 bytes long and can be split into base, limit, access
+byte and flags.
+
+Let's start with a null descriptor which is never referenced by the processor.
+Certain emulators, like Bochs, will complain about limit exceptions if you don't
+have one present. Some use this descriptor to store a pointer to the GDT itself
+(to use with the `LGDT` instruction). The null descriptor is 8 bytes wide and
+the pointer is 6 bytes wide so it might just be the perfect place for this.
+
+Since the null descriptor isn't used, we just fill 8 bytes with zeroes.
+
+--- GDT declaration
+; Offset 0x0
+section .null_descriptor
+	dq 0
+---
+
+Following that, we define a code segment descriptor. As can be seen in the
+comments of the following code block, the values of the entry are scattered all
+over the place.
+
+The base is set to zero while the segment limit is set to the highest possible
+value. Interesting for now is the access byte, which tells the CPU that the
+segment is read-only.
+
+--- GDT declaration +=
+; Offset 0x8
+section .code_segment_descriptor
+	dw 0xFFFF    ; Segment limit (0-15)
+	dw 0         ; Base (0-15)
+	db 0         ; Base (16-23)
+	db 0x9A      ; Access byte
+	db 11001111b ; Flags (high 4 bits), limit (low 4 bits, 16-19)
+	db 0         ; Base (24-31)
+---
+
+Then we define a data segment descriptor. The values for this entry are
+basically the same as for the code segment, with the only change being the
+access byte, which allows us to write to this section.
+
+--- GDT declaration +=
+; Offset 0x10
+section .data_segment_descriptor
+	dw 0xFFFF    ; Segment limit (0-15)
+	dw 0         ; Base (0-15)
+	db 0         ; Base (16-23)
+	db 0x92      ; Access byte
+	db 11001111b ; Flags (high 4 bits), limit (low 4 bits, 16-19)
+	db 0         ; Base (24-31)
+---
+
 @s Linking the Loader
 
 When assembling our code, we get an object file which doesn't contain any
